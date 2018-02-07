@@ -1,4 +1,4 @@
-package com.sneha.demo.Project;
+package com.practical.demo.Project;
 
 public class WalkingRobotWithSwitch {
 	
