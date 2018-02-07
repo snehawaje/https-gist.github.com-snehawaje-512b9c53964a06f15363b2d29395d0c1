@@ -1,0 +1,92 @@
+package com.practical.demo.Project;
+
+public class WalkingRobotWithSwitch {
+	
+	private int x;
+	private int y;
+
+	public static void main(String[] args) {
+
+		WalkingRobotWithSwitch robot = new WalkingRobotWithSwitch();
+
+		System.out.println(robot.Move(5, 2, "SOUTH", "RW2LW4R"));
+
+	}
+
+	public String Move(int inputX, int inputY, String direction, String walkString) {
+
+		this.x = inputX;
+		this.y = inputY;
+		this.faceDirection = direction;
+		
+		int steps = 0;
+
+		for (int i = 0; i < walkString.length(); i++) {
+
+			String walkSide = String.valueOf(walkString.charAt(i++));
+
+			if (i < walkString.length()) {
+
+				walkString.charAt(i++);
+
+				steps = Integer.parseInt(String.valueOf(walkString.charAt(i)));
+
+				doWalk(steps, walkSide);
+
+			} else {
+				doWalk( 0, walkSide);
+			}
+		}
+		return new StringBuilder("(").append(this.x).append(", ").append(this.y).append(") ,").append(this.faceDirection).toString();
+	}
+
+	private String faceDirection;
+
+
+	public void doWalk(int steps, String walkDirection) {
+		switch (faceDirection) {
+
+		case "SOUTH":
+			if (walkDirection.equalsIgnoreCase("R")) {
+				x = x - steps;
+				faceDirection = "WEST";
+			} else {
+				x = x + steps;
+				faceDirection = "EAST";
+			}
+
+			break;
+		case "NORTH":
+			if (walkDirection.equalsIgnoreCase("R")) {
+				x = x + steps;
+				faceDirection = "EAST";
+			} else {
+				x = x - steps;
+				faceDirection = "WEST";
+			}
+			
+			break;
+		case "EAST":
+			if (walkDirection.equalsIgnoreCase("R")) {
+				y = y - steps;
+				faceDirection = "SOUTH";
+			} else {
+				y = y + steps;
+				faceDirection = "NORTH";
+			}
+			
+			break;
+		case "WEST":
+			if (walkDirection.equalsIgnoreCase("R")) {
+				y = y + steps;
+				faceDirection = "NORTH";
+			} else {
+				y = y - steps;
+				faceDirection = "SOUTH";
+			}
+			break;
+		}
+
+	}
+
+}
